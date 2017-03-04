@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from server.app.models import Patient, Medication, Visit, Treatment
+from server.app.models import Patient, Medication, Visit, Treatment, Note
 
 
 class MedicationSerializer(serializers.ModelSerializer):
@@ -13,12 +13,15 @@ class VisitSerializer(serializers.ModelSerializer):
         model = Visit
         fields = ('id', 'date', 'notes')
 
-
 class TreatmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Treatment
         fields = ('id', 'description')
 
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'datetime', 'note', 'patient')
 
 class PatientSerializer(serializers.ModelSerializer):
     medications = MedicationSerializer(many=True)
